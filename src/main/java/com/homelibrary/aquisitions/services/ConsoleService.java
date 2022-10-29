@@ -1,7 +1,11 @@
 package com.homelibrary.aquisitions.services;
 
+import com.homelibrary.aquisitions.HomeLibraryApplication;
 import com.homelibrary.aquisitions.model.Book;
+import com.homelibrary.aquisitions.model.Shelf;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ConsoleService {
@@ -19,11 +23,28 @@ public class ConsoleService {
         return menuSelection;
     }
 
+        public boolean askUserWhetherToAddBookToShelf() {
+        String addBookAnswer;
+        boolean bookIsAddedToShelf = false;
+        System.out.println("Would you like to add this book to your shelf? Enter Y for yes or N for no.");
+        addBookAnswer = scanner.nextLine();
+        if (Objects.equals(addBookAnswer, "Y")) {
+            bookIsAddedToShelf = true;
+        } else if (Objects.equals(addBookAnswer, "N")) {
+            System.out.println("You have elected not to add the book to your bookshelf.");
+        } else {
+            System.out.print("You have not entered a valid answer. ");
+            askUserWhetherToAddBookToShelf();
+        }
+        return bookIsAddedToShelf;
+    }
+
+
     public void printMainMenu() {
         System.out.println("                         ");
         System.out.println("----Online Books Menu----");
-        System.out.println("1: Enter ISBN to search for book");
-//        System.out.println("2: Enter ISBN to add book to bookshelf");
+        System.out.println("1: Search for a book by its ISBN");
+        System.out.println("2: See all books currently on your bookshelf");
 //        System.out.println("1: List all books");
 //        System.out.println("2: List details for specific book");
 //        System.out.println("3: Find books by ISBN");
@@ -43,15 +64,9 @@ public class ConsoleService {
 
     public String promptForBookISBN() {
         System.out.println("--------------------------------------------");
-        System.out.print("Enter ISBN to search for: ");
+        System.out.print("Enter ISBN you would like to search: ");
         return scanner.nextLine();
     }
-
-//    public String promptForBookTitle() {
-//        System.out.println("--------------------------------------------");
-//        System.out.print("Enter title to search for: ");
-//        return scanner.nextLine();
-//    }
 
     public void printBooks(Book[] books) {
         if (books != null) {
@@ -64,14 +79,11 @@ public class ConsoleService {
         }
     }
 
-    //Tester ISBNs:
-    //9780631188919
-    //9780804736336
     public void printBook(Book book) {
 
         //prints title, subtitle (if not null), and author of book after querying two APIs
         System.out.println("--------------------------------------------");
-        System.out.println("Book Details");
+        System.out.println("Book Information");
         System.out.println("--------------------------------------------");
         if (book == null) {
             System.out.println("No book has been found.");
@@ -91,9 +103,15 @@ public class ConsoleService {
             System.out.println("Publisher: " + book.getPublishers());
             System.out.println("Number of Pages: " + book.getNumberOfPages());
             System.out.println("Publication Date: " + book.getPublicationDate());
-//            System.out.println("First Sentence: " + book.getFirstSentence().get(1).toString());
-            System.out.println(" ");
+//          System.out.println("First Sentence: " + book.getFirstSentence().get(1).toString());
             System.out.println("--------------------------------------------");
+            System.out.println(" ");
+        }
+    }
+
+    public void printAllBooksOnShelf(List<Book> books) {
+        for (Book book : books) {
+            printBook(book);
         }
     }
 
@@ -105,8 +123,44 @@ public class ConsoleService {
     public void printErrorMessage() {
         System.out.println("An error occurred. Check the log for details.");
     }
-
 }
+
+//    public void addBookToShelf(String answer, Book book) {
+//        if (answer.equalsIgnoreCase("Y")) {
+//            shelf.getBooks().add(book);
+//            System.out.println("Your book, " + book.getTitle() + " has been added to the shelf.");
+//        } else if (answer.equalsIgnoreCase("N")) {
+//            System.out.println("You have elected not to add " + book.getTitle() + " to your bookshelf.");
+//        } else {
+//            System.out.println("You have not entered a valid answer. Please enter Y for yes or N for no.");
+//            HomeLibraryApplication.handleAddBookToShelf();
+//        }
+//    }
+
+//    public String promptForBookTitle() {
+//        System.out.println("--------------------------------------------");
+//        System.out.print("Enter title to search for: ");
+//        return scanner.nextLine();
+//    }
+
+//    public List<Book> askUserWhetherToAddBookToShelf(Book book) {
+//        String addBookAnswer;
+//        System.out.println("Would you like to add this book to your shelf? Enter Y for yes or N for no.");
+//        addBookAnswer = scanner.nextLine();
+//        if (addBookAnswer == "Y" || addBookAnswer == "y") {
+//            shelf.getBooks().add(book);
+//        } else if (addBookAnswer.equalsIgnoreCase("N")) {
+//            System.out.println("");
+//        } else {
+//            System.out.println("You have not entered a valid answer. Please enter Y for yes or N for no.");
+//            askUserWhetherToAddBookToShelf(book);
+//        }
+//        return shelf.getBooks();
+//    }
+
+//Tester ISBNs:
+//9780631188919
+//9780804736336
 
 
 

@@ -42,7 +42,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, String title, String subtitle, String publishingLocation, String publicationDate, String ISBN, String language, int numberOfPages, Object[] publishers, String shelfLocation, String edition) {
+    public Book(int id, String title, String subtitle, String publicationDate, String ISBN, int numberOfPages, Object[] publishers) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;

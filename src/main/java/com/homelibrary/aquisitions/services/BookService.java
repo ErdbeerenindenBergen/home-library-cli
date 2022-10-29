@@ -14,7 +14,7 @@ public class BookService {
 
     public static String API_BASE_URL = "https://openlibrary.org/";
     private RestTemplate restTemplate = new RestTemplate();
-    private List<Book> shelf;
+    private List<Book> books;
 
     public Book getBook(String isbn) {
         Book book = null;
@@ -42,17 +42,5 @@ public class BookService {
             BasicLogger.log(e.getMessage());
         }
         return book;
-    }
-
-    public void setShelf(List<Book> shelf) {
-        this.shelf = shelf;
-    }
-
-    public void addBookToShelf(Book book) {
-        shelf.add(book);
-    }
-
-    public List<Book> getShelf() {
-        return shelf;
     }
 }

@@ -1,6 +1,7 @@
 package com.homelibrary.aquisitions;
 
 import com.homelibrary.aquisitions.model.Book;
+import com.homelibrary.aquisitions.model.Shelf;
 import com.homelibrary.aquisitions.services.BookService;
 import com.homelibrary.aquisitions.services.ConsoleService;
 import org.springframework.boot.SpringApplication;
@@ -13,11 +14,11 @@ public class HomeLibraryApplication {
 
     private final ConsoleService consoleService = new ConsoleService();
     private final BookService bookService = new BookService();
+    private final Shelf bookShelf = new Shelf();
 
     public static void main(String[] args) {
         HomeLibraryApplication app = new HomeLibraryApplication();
         app.run();
-//        SpringApplication.run(HomeLibraryApplication.class, args);
     }
     private void run() {
         int menuSelection = -1;
@@ -25,9 +26,10 @@ public class HomeLibraryApplication {
             consoleService.printMainMenu();
             menuSelection = consoleService.promptForMenuSelection();
             if (menuSelection == 1) {
-                handleFindBookByISBN();
-//            } else if (menuSelection == 2) {
-//                handleAddBookByISBN();
+                Book book = handleFindBookByISBN();
+                handleAddBookToShelf(book);
+            } if (menuSelection == 2) {
+                handlePrintingAllBooksOnBookShelf();
             } else if (menuSelection != 0) {
                 System.out.println("Invalid Selection");
             }
@@ -42,6 +44,36 @@ public class HomeLibraryApplication {
         }
     }
 
+    private List<Book> handleAddBookToShelf(Book book) {
+        boolean isBookAdded = consoleService.askUserWhetherToAddBookToShelf();
+        bookShelf.addBookToShelf(isBookAdded, book);
+        return bookShelf.getBooks();
+        }
+
+    private void handlePrintingAllBooksOnBookShelf() {
+        if (bookShelf.getBooks().isEmpty()) {
+            System.out.println("You have no books on your bookshelf.");
+        } else {
+            consoleService.printAllBooksOnShelf(bookShelf.getBooks());
+        }
+//        if (bookShelf.getBooks() != null) {
+//            consoleService.printAllBooksOnShelf(bookShelf.getBooks());
+//        } else {
+//            System.out.println("You have no books on your bookshelf.");
+//        }
+    }
+
+    private Book handleFindBookByISBN() {
+        String isbn = consoleService.promptForBookISBN();
+        Book book = null;
+        if (isbn != null) {
+            book = bookService.getBook(isbn);
+            printBookOrError(book);
+        }
+        return book;
+    }
+}
+
 //    private void handleAddBookByISBN() {
 //        String isbn = consoleService.promptForBookISBN();
 //        if (isbn != null) {
@@ -52,12 +84,4 @@ public class HomeLibraryApplication {
 //        }
 //    }
 
-    private void handleFindBookByISBN() {
-        String isbn = consoleService.promptForBookISBN();
-        if (isbn != null) {
-            Book book = bookService.getBook(isbn);
-            printBookOrError(book);
-        }
-    }
-
-}
+//        SpringApplication.run(HomeLibraryApplication.class, args);
