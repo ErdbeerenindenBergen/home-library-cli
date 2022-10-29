@@ -14,27 +14,45 @@ public class BookService {
 
     public static String API_BASE_URL = "https://openlibrary.org/";
     private RestTemplate restTemplate = new RestTemplate();
+    private List<Book> shelf;
 
     public Book getBook(String isbn) {
         Book book = null;
-        Author author = null;
+        Author author;
 
         try {
             book = restTemplate.getForObject(API_BASE_URL + "isbn/" + isbn + ".json", Book.class);
-            List<Object> authorKeysList = book.getAuthors();
-            List<Author> allAuthors = new ArrayList<>();
-            for (Object authorOfBook : authorKeysList) {
-                String authorString = authorOfBook.toString();
-                String additionToBaseAuthorURL = authorString.substring(5, authorString.length() - 1);
-                author = restTemplate.getForObject(API_BASE_URL + additionToBaseAuthorURL + ".json", Author.class);
-                allAuthors.add(author);
+            if (book == null) {
+                System.out.println("This book could not be found.");
+            } else {
+                List<Object> authorKeysList = book.getAuthors();
+                List<Author> allAuthors = new ArrayList<>();
+                for (Object authorOfBook : authorKeysList) {
+                    String authorString = authorOfBook.toString();
+                    String additionToBaseAuthorURL = authorString.substring(5, authorString.length() - 1);
+                    author = restTemplate.getForObject(API_BASE_URL + additionToBaseAuthorURL + ".json", Author.class);
+                    allAuthors.add(author);
+                }
+                book.setAllAuthors(allAuthors);
+//            shelf.add(book);
             }
-            book.setAllAuthors(allAuthors);
         } catch (RestClientResponseException e) {
             BasicLogger.log(e.getRawStatusCode() + " : " + e.getStatusText());
         } catch (ResourceAccessException e) {
             BasicLogger.log(e.getMessage());
         }
         return book;
+    }
+
+    public void setShelf(List<Book> shelf) {
+        this.shelf = shelf;
+    }
+
+    public void addBookToShelf(Book book) {
+        shelf.add(book);
+    }
+
+    public List<Book> getShelf() {
+        return shelf;
     }
 }

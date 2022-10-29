@@ -6,6 +6,8 @@ import com.homelibrary.aquisitions.services.ConsoleService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 @SpringBootApplication
 public class HomeLibraryApplication {
 
@@ -24,6 +26,8 @@ public class HomeLibraryApplication {
             menuSelection = consoleService.promptForMenuSelection();
             if (menuSelection == 1) {
                 handleFindBookByISBN();
+//            } else if (menuSelection == 2) {
+//                handleAddBookByISBN();
             } else if (menuSelection != 0) {
                 System.out.println("Invalid Selection");
             }
@@ -37,6 +41,16 @@ public class HomeLibraryApplication {
             consoleService.printErrorMessage();
         }
     }
+
+//    private void handleAddBookByISBN() {
+//        String isbn = consoleService.promptForBookISBN();
+//        if (isbn != null) {
+//            Book book = bookService.getBook(isbn);
+//            bookService.addBookToShelf(book);
+//            List<Book> shelf = bookService.getShelf();
+//            System.out.println();
+//        }
+//    }
 
     private void handleFindBookByISBN() {
         String isbn = consoleService.promptForBookISBN();

@@ -1,9 +1,7 @@
 package com.homelibrary.aquisitions.services;
 
-import com.homelibrary.aquisitions.model.Author;
 import com.homelibrary.aquisitions.model.Book;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleService {
@@ -22,9 +20,10 @@ public class ConsoleService {
     }
 
     public void printMainMenu() {
-        System.out.println();
+        System.out.println("                         ");
         System.out.println("----Online Books Menu----");
-            System.out.println("1: Enter ISBN to search for book");
+        System.out.println("1: Enter ISBN to search for book");
+//        System.out.println("2: Enter ISBN to add book to bookshelf");
 //        System.out.println("1: List all books");
 //        System.out.println("2: List details for specific book");
 //        System.out.println("3: Find books by ISBN");
@@ -32,7 +31,7 @@ public class ConsoleService {
 //        System.out.println("5: Create a new book");
 //        System.out.println("6: Modify a book");
 //        System.out.println("7: Delete a book");
-//        System.out.println("0: Exit");
+        System.out.println("0: Exit");
         System.out.println();
     }
 
@@ -83,11 +82,18 @@ public class ConsoleService {
             }
             System.out.print("Author(s): ");
             for (int i = 0; i < book.getAllAuthors().size(); i++)
-                if (i == (book.getAllAuthors().size()-1)) {
-                System.out.print(book.getAllAuthors().get(i).getName());
-                }  else {
+                if (i == (book.getAllAuthors().size() - 1)) {
+                    System.out.print(book.getAllAuthors().get(i).getName());
+                } else {
                     System.out.print(book.getAllAuthors().get(i).getName() + ", ");
                 }
+            System.out.println(" ");
+            System.out.println("Publisher: " + book.getPublishers());
+            System.out.println("Number of Pages: " + book.getNumberOfPages());
+            System.out.println("Publication Date: " + book.getPublicationDate());
+//            System.out.println("First Sentence: " + book.getFirstSentence().get(1).toString());
+            System.out.println(" ");
+            System.out.println("--------------------------------------------");
         }
     }
 
