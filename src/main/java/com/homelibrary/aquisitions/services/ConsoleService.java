@@ -1,6 +1,9 @@
 package com.homelibrary.aquisitions.services;
 
+import com.homelibrary.aquisitions.model.Author;
 import com.homelibrary.aquisitions.model.Book;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleService {
@@ -54,7 +57,7 @@ public class ConsoleService {
     public void printBooks(Book[] books) {
         if (books != null) {
             System.out.println("--------------------------------------------");
-            System.out.println("Auctions");
+            System.out.println("Books");
             System.out.println("--------------------------------------------");
             for (Book book : books) {
                 System.out.println(book.getTitle());
@@ -62,7 +65,12 @@ public class ConsoleService {
         }
     }
 
+    //Tester ISBNs:
+    //9780631188919
+    //9780804736336
     public void printBook(Book book) {
+
+        //prints title, subtitle (if not null), and author of book after querying two APIs
         System.out.println("--------------------------------------------");
         System.out.println("Book Details");
         System.out.println("--------------------------------------------");
@@ -70,8 +78,16 @@ public class ConsoleService {
             System.out.println("No book has been found.");
         } else {
             System.out.println("Title: " + book.getTitle());
-            System.out.println("Subtitle: " + book.getSubtitle());
-            System.out.println("Author(s): " + book.getAuthor());
+            if (book.getSubtitle() != null) {
+                System.out.println("Subtitle: " + book.getSubtitle());
+            }
+            System.out.print("Author(s): ");
+            for (int i = 0; i < book.getAllAuthors().size(); i++)
+                if (i == (book.getAllAuthors().size()-1)) {
+                System.out.print(book.getAllAuthors().get(i).getName());
+                }  else {
+                    System.out.print(book.getAllAuthors().get(i).getName() + ", ");
+                }
         }
     }
 

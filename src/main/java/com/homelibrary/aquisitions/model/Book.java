@@ -1,17 +1,22 @@
 package com.homelibrary.aquisitions.model;
 
-import com.fasterxml.jackson.annotation.JsonKey;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Map;
+import java.util.List;
 
 public class Book {
 
     private int id;
     private String title;
     private String subtitle;
-    private Author author;
 
-    private Map authors;
+    private List<Author> allAuthors;
+
+    //variable made to store author keys below
+    @JsonProperty("authors")
+    private List<Object> authors;
+
+    private List<String> authorNames;
     private String publishingLocation;
     private String publishingDate;
     private String ISBN;
@@ -39,103 +44,23 @@ public class Book {
         this.edition = edition;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getSubtitle() {
         return subtitle;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public List<Object> getAuthors() {
+        return authors;
     }
 
-    public Author getAuthor() {
-        return author;
+    public void setAllAuthors(List<Author> allAuthors) {
+        this.allAuthors = allAuthors;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public String getPublishingLocation() {
-        return publishingLocation;
-    }
-
-    public void setPublishingLocation(String publishingLocation) {
-        this.publishingLocation = publishingLocation;
-    }
-
-    public String getPublishingDate() {
-        return publishingDate;
-    }
-
-    public void setPublishingDate(String publishingDate) {
-        this.publishingDate = publishingDate;
-    }
-
-    public String getISBN() {
-        return ISBN;
-    }
-
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public int getPageTotal() {
-        return pageTotal;
-    }
-
-    public void setPageTotal(int pageTotal) {
-        this.pageTotal = pageTotal;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public String getShelfLocation() {
-        return shelfLocation;
-    }
-
-    public void setShelfLocation(String shelfLocation) {
-        this.shelfLocation = shelfLocation;
-    }
-
-    public String getEdition() {
-        return edition;
-    }
-
-    public void setEdition(String edition) {
-        this.edition = edition;
-    }
-
-    public Map getAuthors() {
-        return this.authors;
+    public List<Author> getAllAuthors() {
+        return allAuthors;
     }
 }
