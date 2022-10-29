@@ -30,6 +30,8 @@ public class HomeLibraryApplication {
                 handleAddBookToShelf(book);
             } else if (menuSelection == 2) {
                 handlePrintingAllBooksOnBookShelf();
+            } else if (menuSelection == 3) {
+                handleRemovingBookFromBookShelf();
             } else if (menuSelection != 0) {
                 System.out.println("Invalid Selection");
             }
@@ -74,6 +76,12 @@ public class HomeLibraryApplication {
             printBookOrError(book);
         }
         return book;
+    }
+
+    private void handleRemovingBookFromBookShelf() {
+        consoleService.printTitlesAndOrderOfBooksOnShelf(bookShelf.getBooks());
+        consoleService.promptForBookToDelete();
+
     }
 }
 

@@ -67,6 +67,12 @@ public class ConsoleService {
         return scanner.nextLine();
     }
 
+    public String promptForBookToDelete() {
+        System.out.println("--------------------------------------------");
+        System.out.print("Enter the number of the book you would you like to delete: ");
+        return scanner.nextLine();
+    }
+
     public void printBooks(Book[] books) {
         if (books != null) {
             System.out.println("--------------------------------------------");
@@ -75,6 +81,15 @@ public class ConsoleService {
             for (Book book : books) {
                 System.out.println(book.getTitle());
             }
+        }
+    }
+
+    public void printTitlesAndOrderOfBooksOnShelf(List<Book> books) {
+        for (int i = 0; i < books.size(); ++i) {
+            System.out.println("--------------------------------------------");
+            System.out.println("Book " + i);
+            System.out.println("--------------------------------------------");
+            System.out.println("Title: " + books.get(i).getTitle());
         }
     }
 
