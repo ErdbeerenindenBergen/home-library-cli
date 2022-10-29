@@ -27,6 +27,11 @@ public class Shelf {
         }
     }
 
+    public void removeBookFromShelf(int bookToRemove) {
+        books.remove(bookToRemove-1);
+        System.out.println("You have successfully removed a book from your bookshelf.");
+    }
+
     public void setBooks(List<Book> books) {
         this.books = books;
     }

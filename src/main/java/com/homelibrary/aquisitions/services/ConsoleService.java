@@ -44,6 +44,7 @@ public class ConsoleService {
         System.out.println("----Online Books Menu----");
         System.out.println("1: Search for a book by its ISBN");
         System.out.println("2: See all books currently on your bookshelf");
+        System.out.println("3: Remove a book from your bookshelf");
 //        System.out.println("1: List all books");
 //        System.out.println("2: List details for specific book");
 //        System.out.println("3: Find books by ISBN");
@@ -67,10 +68,16 @@ public class ConsoleService {
         return scanner.nextLine();
     }
 
-    public String promptForBookToDelete() {
+    public int promptForBookToRemove() {
+        int bookToRemove;
         System.out.println("--------------------------------------------");
         System.out.print("Enter the number of the book you would you like to delete: ");
-        return scanner.nextLine();
+        try {
+            bookToRemove = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            bookToRemove = -1;
+        }
+        return bookToRemove;
     }
 
     public void printBooks(Book[] books) {
@@ -85,10 +92,9 @@ public class ConsoleService {
     }
 
     public void printTitlesAndOrderOfBooksOnShelf(List<Book> books) {
-        for (int i = 0; i < books.size(); ++i) {
+        for (int i = 0; i < books.size(); i++) {
             System.out.println("--------------------------------------------");
-            System.out.println("Book " + i);
-            System.out.println("--------------------------------------------");
+            System.out.println("Book " + (i+1));
             System.out.println("Title: " + books.get(i).getTitle());
         }
     }
@@ -121,6 +127,9 @@ public class ConsoleService {
 
     public void printAllBooksOnShelf(List<Book> books) {
         for (Book book : books) {
+            System.out.println("--------------------------------------------");
+            System.out.println("Book Information");
+            System.out.println("--------------------------------------------");
             printBook(book);
         }
     }

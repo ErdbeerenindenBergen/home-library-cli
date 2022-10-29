@@ -60,6 +60,7 @@ public class HomeLibraryApplication {
             System.out.println("You have no books on your bookshelf.");
         } else {
             consoleService.printAllBooksOnShelf(bookShelf.getBooks());
+            consoleService.pause();
         }
 //        if (bookShelf.getBooks() != null) {
 //            consoleService.printAllBooksOnShelf(bookShelf.getBooks());
@@ -80,8 +81,8 @@ public class HomeLibraryApplication {
 
     private void handleRemovingBookFromBookShelf() {
         consoleService.printTitlesAndOrderOfBooksOnShelf(bookShelf.getBooks());
-        consoleService.promptForBookToDelete();
-
+        int bookToRemove = consoleService.promptForBookToRemove();
+        bookShelf.removeBookFromShelf(bookToRemove);
     }
 }
 
