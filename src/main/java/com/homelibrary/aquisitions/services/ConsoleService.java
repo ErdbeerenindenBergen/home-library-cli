@@ -34,7 +34,6 @@ public class ConsoleService {
             System.out.println("You have elected not to add the book to your bookshelf.");
         } else {
             System.out.print("You have not entered a valid answer. ");
-            askUserWhetherToAddBookToShelf();
         }
         return bookIsAddedToShelf;
     }
@@ -80,11 +79,7 @@ public class ConsoleService {
     }
 
     public void printBook(Book book) {
-
         //prints title, subtitle (if not null), and author of book after querying two APIs
-        System.out.println("--------------------------------------------");
-        System.out.println("Book Information");
-        System.out.println("--------------------------------------------");
         if (book == null) {
             System.out.println("No book has been found.");
         } else {

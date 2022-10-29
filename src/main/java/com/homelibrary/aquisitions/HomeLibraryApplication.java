@@ -28,7 +28,7 @@ public class HomeLibraryApplication {
             if (menuSelection == 1) {
                 Book book = handleFindBookByISBN();
                 handleAddBookToShelf(book);
-            } if (menuSelection == 2) {
+            } else if (menuSelection == 2) {
                 handlePrintingAllBooksOnBookShelf();
             } else if (menuSelection != 0) {
                 System.out.println("Invalid Selection");
@@ -38,6 +38,9 @@ public class HomeLibraryApplication {
 
     private void printBookOrError(Book book) {
         if (book != null) {
+            System.out.println("--------------------------------------------");
+            System.out.println("Book Information");
+            System.out.println("--------------------------------------------");
             consoleService.printBook(book);
         } else {
             consoleService.printErrorMessage();

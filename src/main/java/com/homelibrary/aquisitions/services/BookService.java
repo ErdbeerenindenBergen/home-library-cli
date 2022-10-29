@@ -34,7 +34,6 @@ public class BookService {
                     allAuthors.add(author);
                 }
                 book.setAllAuthors(allAuthors);
-//            shelf.add(book);
             }
         } catch (RestClientResponseException e) {
             BasicLogger.log(e.getRawStatusCode() + " : " + e.getStatusText());
