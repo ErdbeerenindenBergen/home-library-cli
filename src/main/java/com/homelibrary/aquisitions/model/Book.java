@@ -51,6 +51,10 @@ public class Book {
         this.publishers = publishers;
     }
 
+    public String getISBN() {
+        return ISBN;
+    }
+
     public String getTitle() {
         return title;
     }
