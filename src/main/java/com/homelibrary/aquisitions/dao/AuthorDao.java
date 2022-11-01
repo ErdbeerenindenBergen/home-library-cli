@@ -10,7 +10,7 @@ public interface AuthorDao {
 
     List<Author> getAuthorsByBook(int ISBN);
 
-    Author createAuthor(Author author);
+    void createAuthor(Author author);
 
     void updateAuthor(Author author);
 

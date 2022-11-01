@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -30,18 +31,27 @@ public class JdbcAuthorDao implements AuthorDao {
 
     @Override
     public List<Author> getAuthorsByBook(int ISBN) {
-        return null;
+        List<Author> authors = new ArrayList<>();
+        String sql = "SELECT author.name FROM author JOIN book_author ON author.author_id = book_author.author_id WHERE isbn = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, ISBN);
+        while (results.next()) {
+            authors.add(mapRowToAuthor(results));
+        }
+        return authors;
     }
 
     @Override
-    public Author createAuthor(Author author) {
-        String sql = "INSERT INTO author ()"
-        return null;
+    public void createAuthor(Author author) {
+        String sql = "INSERT INTO author(author_id, name) " +
+                "VALUES (?, ?)";
+        jdbcTemplate.update(sql, author.getAuthorId(), author.getName());
     }
 
     @Override
     public void updateAuthor(Author author) {
-
+        String sql = "UPDATE author " +
+                "SET name = ?, author_id = ?;";
+        jdbcTemplate.update(sql, author.getName(), author.getAuthorId());
     }
 
     @Override
