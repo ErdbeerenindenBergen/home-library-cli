@@ -23,6 +23,8 @@ public class ConsoleService {
         return menuSelection;
     }
 
+    //Select * from vw_get_all_reservations
+
         public boolean askUserWhetherToAddBookToShelf() {
         String addBookAnswer;
         boolean bookIsAddedToShelf = false;

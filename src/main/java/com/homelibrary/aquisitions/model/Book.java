@@ -26,7 +26,6 @@ public class Book {
     @JsonProperty("authors")
     private List<Object> authors;
 
-    private List<String> authorNames;
 //    private String publishingLocation;
 
     @JsonProperty("publish_date")
@@ -87,5 +86,34 @@ public class Book {
 
     public String getPublicationDate() {
         return publicationDate;
+    }
+
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public void setPublishers(Object publishers) {
+        this.publishers = publishers;
+    }
+
+    public void setAuthors(List<Object> authors) {
+        this.authors = authors;
+    }
+
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setNumberOfPages(int numberOfPages) {
+        this.numberOfPages = numberOfPages;
     }
 }

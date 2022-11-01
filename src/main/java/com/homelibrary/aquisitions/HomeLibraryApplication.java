@@ -60,13 +60,7 @@ public class HomeLibraryApplication {
             System.out.println("You have no books on your bookshelf.");
         } else {
             consoleService.printAllBooksOnShelf(bookShelf.getBooks());
-            consoleService.pause();
-        }
-//        if (bookShelf.getBooks() != null) {
-//            consoleService.printAllBooksOnShelf(bookShelf.getBooks());
-//        } else {
-//            System.out.println("You have no books on your bookshelf.");
-//        }
+        } consoleService.pause();
     }
 
     private Book handleFindBookByISBN() {
