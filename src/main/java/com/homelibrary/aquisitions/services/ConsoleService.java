@@ -25,7 +25,7 @@ public class ConsoleService {
 
     //Select * from vw_get_all_reservations
 
-        public boolean askUserWhetherToAddBookToShelf() {
+        public boolean askUserWhetherToAddBook() {
         String addBookAnswer;
         boolean bookIsAddedToShelf = false;
         System.out.println("Would you like to add this book to your shelf? Enter Y for yes or N for no.");
@@ -56,6 +56,14 @@ public class ConsoleService {
 //        System.out.println("7: Delete a book");
         System.out.println("0: Exit");
         System.out.println();
+    }
+
+    public void printAddBookMenu() {
+        System.out.println("                         ");
+        System.out.println("Please select from the following options:");
+        System.out.println("1: Add this book to your bookshelf.");
+        System.out.println("2: Add this book to your home library.");
+        System.out.println("3: Return to Main Menu.");
     }
 
     public void printBookMenu(Book[] books) {
@@ -136,10 +144,10 @@ public class ConsoleService {
         }
     }
 
-    public void pause() {
-        System.out.println("\nPress Enter to continue...");
-        scanner.nextLine();
-    }
+//    public void pause() {
+//        System.out.println("\nPress Enter to continue...");
+//        scanner.nextLine();
+//    }
 
     public void printErrorMessage() {
         System.out.println("An error occurred. Check the log for details.");

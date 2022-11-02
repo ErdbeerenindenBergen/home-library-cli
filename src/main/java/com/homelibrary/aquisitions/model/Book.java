@@ -6,19 +6,9 @@ import java.util.List;
 
 public class Book {
 
-    private int id;
-
-    @JsonProperty("goodreads")
-    private String goodreadsId;
-
-    @JsonProperty("librarything")
-    private String librarythingId;
     private String title;
     private String subtitle;
-
     private Object publishers;
-//    @JsonProperty("first_sentence")
-//    private List<Object> firstSentence;
 
     private List<Author> allAuthors;
 
@@ -26,23 +16,25 @@ public class Book {
     @JsonProperty("authors")
     private List<Object> authors;
 
-//    private String publishingLocation;
-
     @JsonProperty("publish_date")
     private String publicationDate;
+
     private String ISBN;
-//    private String language;
 
     @JsonProperty("number_of_pages")
     private int numberOfPages;
+
 //    private String shelfLocation;
 //    private String edition;
+//    @JsonProperty("first_sentence")
+//    private List<Object> firstSentence;
+//    private String language;
+//    private String publishingLocation;
 
     public Book() {
     }
 
-    public Book(int id, String title, String subtitle, String publicationDate, String ISBN, int numberOfPages, Object[] publishers) {
-        this.id = id;
+    public Book(String title, String subtitle, String publicationDate, String ISBN, int numberOfPages, Object[] publishers) {
         this.title = title;
         this.subtitle = subtitle;
         this.publicationDate = publicationDate;

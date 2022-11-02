@@ -32,6 +32,7 @@ public class HomeLibraryApplication {
         dataSource.setUsername("postgres");
 
         HomeLibraryApplication app = new HomeLibraryApplication(dataSource);
+//        HomeLibraryApplication app = new HomeLibraryApplication();
         app.run();
     }
 
@@ -48,7 +49,7 @@ public class HomeLibraryApplication {
             menuSelection = consoleService.promptForMenuSelection();
             if (menuSelection == 1) {
                 Book book = handleFindBookByISBN();
-                handleAddBookToShelf(book);
+                handleAddBookToShelfOrDataBase(book);
             } else if (menuSelection == 2) {
                 handlePrintingAllBooksOnBookShelf();
             } else if (menuSelection == 3) {
@@ -70,18 +71,26 @@ public class HomeLibraryApplication {
         }
     }
 
-    private List<Book> handleAddBookToShelf(Book book) {
-        boolean isBookAdded = consoleService.askUserWhetherToAddBookToShelf();
-        bookShelf.addBookToShelf(isBookAdded, book);
-        return bookShelf.getBooks();
+    private void handleAddBookToShelfOrDataBase(Book book) {
+        consoleService.printAddBookMenu();
+        Integer menuSelection = consoleService.promptForMenuSelection();
+//        boolean isBookAdded = consoleService.askUserWhetherToAddBook();
+        if (menuSelection == 1) {
+            bookShelf.addBookToShelf(true, book);
+        } else if (menuSelection == 2) {
+            bookDao.createBook(book);
+        } else if (menuSelection != 0) {
+            System.out.println("Invalid Selection");
         }
+    }
 
     private void handlePrintingAllBooksOnBookShelf() {
         if (bookShelf.getBooks().isEmpty()) {
             System.out.println("You have no books on your bookshelf.");
         } else {
             consoleService.printAllBooksOnShelf(bookShelf.getBooks());
-        } consoleService.pause();
+        }
+//        consoleService.pause();
     }
 
     private Book handleFindBookByISBN() {
@@ -112,3 +121,7 @@ public class HomeLibraryApplication {
 //    }
 
 //        SpringApplication.run(HomeLibraryApplication.class, args);
+
+//Tester ISBNs:
+//9780631188919
+//9780804736336

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookDao {
 
-    public Book getBook(int ISBN);
+    public Book getBookFromDatabase(String ISBN);
 
     public List<Book> findAll();
 
@@ -19,6 +19,6 @@ public interface BookDao {
 
     public void updateBook(Book book);
 
-    public void deleteBook(int ISBN);
+    public void deleteBook(String ISBN);
 
 }

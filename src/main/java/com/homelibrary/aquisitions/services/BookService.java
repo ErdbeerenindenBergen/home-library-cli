@@ -14,7 +14,6 @@ public class BookService {
 
     public static String API_BASE_URL = "https://openlibrary.org/";
     private RestTemplate restTemplate = new RestTemplate();
-    private List<Book> books;
 
     public Book getBook(String isbn) {
         Book book = null;
@@ -22,6 +21,7 @@ public class BookService {
 
         try {
             book = restTemplate.getForObject(API_BASE_URL + "isbn/" + isbn + ".json", Book.class);
+            book.setISBN(isbn);
             if (book == null) {
                 System.out.println("This book could not be found.");
             } else {

@@ -19,9 +19,7 @@ public class JdbcAuthorDao implements AuthorDao {
     @Override
     public Author getAuthor(String authorId) {
         Author author = null;
-        String sql = "SELECT author_id, name\n" +
-                "\tFROM author " +
-                "WHERE author_id = ?";
+        String sql = "SELECT author_id, name FROM author WHERE author_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, authorId);
         if (results.next()) {
             author = mapRowToAuthor(results);
@@ -42,15 +40,13 @@ public class JdbcAuthorDao implements AuthorDao {
 
     @Override
     public void createAuthor(Author author) {
-        String sql = "INSERT INTO author(author_id, name) " +
-                "VALUES (?, ?)";
+        String sql = "INSERT INTO author(author_id, name) VALUES (?, ?)";
         jdbcTemplate.update(sql, author.getAuthorId(), author.getName());
     }
 
     @Override
     public void updateAuthor(Author author) {
-        String sql = "UPDATE author " +
-                "SET name = ?, author_id = ?;";
+        String sql = "UPDATE author SET name = ?, author_id = ?;";
         jdbcTemplate.update(sql, author.getName(), author.getAuthorId());
     }
 
@@ -64,9 +60,7 @@ public class JdbcAuthorDao implements AuthorDao {
 
     @Override
     public void addAuthorToBook(String ISBN, int authorId) {
-        String sql = "INSERT INTO public.book_author(\n" +
-                "\tisbn, author_id)\n" +
-                "\tVALUES (?, ?);";
+        String sql = "INSERT INTO public.book_author(isbn, author_id) VALUES (?, ?);";
         jdbcTemplate.update(sql, ISBN, authorId);
     }
 

@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS book, author, book_author;
 
 CREATE TABLE IF NOT EXISTS book
 (
-    isbn bigint NOT NULL,
+    isbn character varying NOT NULL,
     title character varying NOT NULL,
     subtitle character varying,
     publishers character varying,
@@ -34,8 +34,8 @@ ALTER TABLE IF EXISTS author
 
 CREATE TABLE IF NOT EXISTS book_author
 (
-    isbn bigint NOT NULL,
-    author_id character NOT NULL,
+    isbn character varying NOT NULL,
+    author_id character varying NOT NULL,
     CONSTRAINT book_author_pkey PRIMARY KEY (author_id, isbn),
     CONSTRAINT fk_book_author_author_id_author_author_id FOREIGN KEY (author_id) REFERENCES author (author_id),
     CONSTRAINT fk_book_author_isbn_book_isbn FOREIGN KEY (isbn) REFERENCES book (isbn)

@@ -10,7 +10,9 @@ public class Author {
     @JsonProperty("key")
     private String key;
 
-    private String authorId = key.substring(14, key.length() - 1);
+    private String authorId;
+
+//    private String authorId = key.substring(14, key.length() - 1);
 
     @Override
     public String toString() {

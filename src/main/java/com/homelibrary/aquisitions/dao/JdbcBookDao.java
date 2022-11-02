@@ -17,7 +17,7 @@ public class JdbcBookDao implements BookDao {
     public JdbcBookDao(DataSource dataSource) {this.jdbcTemplate = new JdbcTemplate(dataSource);}
 
     @Override
-    public Book getBook(int ISBN) {
+    public Book getBookFromDatabase(String ISBN) {
         Book book = null;
         String sql = "SELECT isbn, title, subtitle, publishers, publish_date, number_of_pages FROM book WHERE isbn = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, ISBN);
@@ -63,22 +63,18 @@ public class JdbcBookDao implements BookDao {
 
     @Override
     public void createBook(Book book) {
-        String sql = "INSERT INTO public.book(\n" +
-                "\tisbn, title, subtitle, publishers, publish_date, number_of_pages)\n" +
-                "\tVALUES (?, ?, ?, ?, ?, ?) RETURNING isbn;";
+        String sql = "INSERT INTO book(isbn, title, subtitle, publishers, publish_date, number_of_pages) VALUES (?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, book.getISBN(), book.getTitle(), book.getSubtitle(), book.getPublishers(), book.getPublicationDate(), book.getNumberOfPages());
     }
 
     @Override
     public void updateBook(Book book) {
-        String sql = "UPDATE book " +
-                "SET title = ?, subtitle = ?, publishers = ?, publish_date = ?, number_of_pages = ? " +
-                "WHERE isbn = ?;";
+        String sql = "UPDATE book SET title = ?, subtitle = ?, publishers = ?, publish_date = ?, number_of_pages = ? WHERE isbn = ?;";
         jdbcTemplate.update(sql, book.getTitle(), book.getSubtitle(), book.getPublishers(), book.getPublicationDate(), book.getNumberOfPages());
     }
 
     @Override
-    public void deleteBook(int ISBN) {
+    public void deleteBook(String ISBN) {
         String sql = "DELETE FROM book_author WHERE isbn = ?;";
         jdbcTemplate.update(sql, ISBN);
         sql = "DELETE FROM book WHERE isbn = ?;";
