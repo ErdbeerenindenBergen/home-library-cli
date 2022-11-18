@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookService {
- 
+
     public static String API_BASE_URL = "https://openlibrary.org/";
     private RestTemplate restTemplate = new RestTemplate();
 
